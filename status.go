@@ -19,7 +19,7 @@ type Target struct {
 }
 
 func main() {
-	// gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
 	now := time.Now()
 	targets := []Target{
 		Target{"https://yorkyao.xyz/api/version", "GET", 0, 0, "", true, now},
