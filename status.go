@@ -52,6 +52,7 @@ func main() {
 					targets[i].fail++
 					targets[i].lastError = err.Error()
 					targets[i].lastIsSuccess = false
+					defer resp.Body.Close()
 				}
 			}
 		}
@@ -70,5 +71,7 @@ func main() {
 		}
 		c.String(200, result)
 	})
-	r.Run("localhost:9992")
+	address := "localhost:9992"
+	fmt.Println("listening: " + address)
+	r.Run(address)
 }
