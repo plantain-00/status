@@ -60,7 +60,7 @@ func main() {
 	}()
 
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
+	r.GET("/api/status", func(c *gin.Context) {
 		c.JSON(200, targets)
 	})
 	address := "localhost:9992"

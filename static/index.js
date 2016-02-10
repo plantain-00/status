@@ -8,7 +8,7 @@ var vue = new Vue({
 var precise = 10000.0;
 
 $.ajax({
-    url: "http://localhost:9991",
+    url: "/api/status",
     cache: false,
     success: function (data) {
         for (var i = 0; i < data.length; i++) {
