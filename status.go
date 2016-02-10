@@ -9,13 +9,13 @@ import (
 )
 
 type Target struct {
-	url           string
-	method        string
-	total         int
-	fail          int
-	lastError     string
-	lastIsSuccess bool
-	lastTime      time.Time
+	URL           string    `json:"url"`
+	Method        string    `json:"method"`
+	Total         int       `json:"total"`
+	Fail          int       `json:"fail"`
+	LastError     string    `json:"lastError"`
+	LastIsSuccess bool      `json:"lastIsSuccess"`
+	LastTime      time.Time `json:"lastTime"`
 }
 
 func main() {
@@ -39,19 +39,19 @@ func main() {
 			for i := 0; i < len(targets); i++ {
 				var resp *http.Response
 				var err error
-				if targets[i].method == "GET" {
-					resp, err = http.Get(targets[i].url)
+				if targets[i].Method == "GET" {
+					resp, err = http.Get(targets[i].URL)
 				} else {
-					resp, err = http.Post(targets[i].url, "application/x-www-form-urlencoded", nil)
+					resp, err = http.Post(targets[i].URL, "application/x-www-form-urlencoded", nil)
 				}
-				targets[i].total++
-				targets[i].lastTime = time.Now()
+				targets[i].Total++
+				targets[i].LastTime = time.Now()
 				if err == nil && resp.StatusCode < 500 {
-					targets[i].lastIsSuccess = true
+					targets[i].LastIsSuccess = true
 				} else {
-					targets[i].fail++
-					targets[i].lastError = err.Error()
-					targets[i].lastIsSuccess = false
+					targets[i].Fail++
+					targets[i].LastError = err.Error()
+					targets[i].LastIsSuccess = false
 					defer resp.Body.Close()
 				}
 			}
@@ -60,16 +60,7 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
-		result := ""
-		for i := 0; i < len(targets); i++ {
-			target := targets[i]
-			if target.lastIsSuccess == false {
-				result += target.url + ": fail\n"
-			} else {
-				result += target.url + ": success\n"
-			}
-		}
-		c.String(200, result)
+		c.JSON(200, targets)
 	})
 	address := "localhost:9992"
 	fmt.Println("listening: " + address)
