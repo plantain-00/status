@@ -2,10 +2,15 @@
 
 <head>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table-style {
+            margin: 20px;
+        }
+    </style>
 </head>
 
-<body>
-    <table id="vue" class="table table-striped table-bordered" style="margin:20px;">
+<body id="vue">
+    <table class="table table-striped table-bordered table-style">
         <tr v-for="s in status">
             <td>
                 <span class="label label-{{s.lastIsSuccess ? 'success' : 'danger' }}">{{s.name}}</span>
@@ -16,6 +21,22 @@
             <td>{{s.url}}</td>
             <td>{{s.lastTime}}</td>
             <td>{{s.lastError}}</td>
+        </tr>
+    </table>
+    <table class="table table-striped table-bordered table-style">
+        <tr v-for="r in repositories">
+            <td>{{r}}</td>
+            <td>
+                <a href="https://david-dm.org/plantain-00/{{r}}">
+                    <img src="https://david-dm.org/plantain-00/{{r}}.svg" alt="Dependency Status" style="max-width:100%;">
+                </a>
+                <a href="https://david-dm.org/plantain-00/{{r}}#info=devDependencies">
+                    <img src="https://david-dm.org/plantain-00/{{r}}/dev-status.svg" alt="devDependency Status" style="max-width:100%;">
+                </a>
+                <a href="https://travis-ci.org/plantain-00/{{r}}">
+                    <img src="https://travis-ci.org/plantain-00/{{r}}.svg?branch=master" alt="Build Status" style="max-width:100%;">
+                </a>
+            </td>
         </tr>
     </table>
     <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>

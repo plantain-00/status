@@ -1,7 +1,17 @@
 var vue = new Vue({
     el: "#vue",
     data: {
-        status: []
+        status: [],
+        repositories: [
+            "plantain-00.github.io",
+            "news-fetcher-client",
+            "deploy-robot",
+            "SubsNoti-frontends",
+            "SubsNoti-doc",
+            "news-fetcher",
+            "SubsNoti",
+            "SubsNoti-app"
+        ]
     }
 });
 
