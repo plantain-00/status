@@ -15,14 +15,12 @@ var vue = new Vue({
     }
 });
 
-var precise = 10000.0;
-
 $.ajax({
     url: "/api/status",
     cache: false,
     success: function (data) {
         for (var i = 0; i < data.length; i++) {
-            var rate = data[i].total === 0 ? 1 : Math.round(precise * (data[i].total - data[i].fail) / data[i].total) / precise;
+            var rate = data[i].total === 0 ? 1 : +((data[i].total - data[i].fail) / data[i].total).toFixed(4);
             var first = Math.round(255 - rate * 255);
             var second = Math.round(rate * 255);
             var color = (first * 256 * 256 + second * 256).toString(16);
