@@ -9,6 +9,7 @@ import (
 )
 
 type Target struct {
+	Name          string    `json:"name"`
 	URL           string    `json:"url"`
 	Method        string    `json:"method"`
 	Total         int       `json:"total"`
@@ -22,12 +23,12 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	now := time.Now()
 	targets := []Target{
-		Target{"https://yorkyao.xyz/api/version", "GET", 0, 0, "", true, now},
-		Target{"https://yorkyao.xyz/", "GET", 0, 0, "", true, now},
-		Target{"https://doc.yorkyao.xyz/", "GET", 0, 0, "", true, now},
-		Target{"https://news.yorkyao.xyz/items", "GET", 0, 0, "", true, now},
-		Target{"https://robot.yorkyao.xyz/", "POST", 0, 0, "", true, now},
-		Target{"https://upload.yorkyao.xyz/api/temperary", "POST", 0, 0, "", true, now},
+		Target{"subsnoti backend", "https://yorkyao.xyz/api/version", "GET", 0, 0, "", true, now},
+		Target{"subsnoti frontend", "https://yorkyao.xyz/", "GET", 0, 0, "", true, now},
+		Target{"subsnoti doc", "https://doc.yorkyao.xyz/", "GET", 0, 0, "", true, now},
+		Target{"news fetcher", "https://news.yorkyao.xyz/items", "GET", 0, 0, "", true, now},
+		Target{"deploy robot", "https://robot.yorkyao.xyz/", "POST", 0, 0, "", true, now},
+		Target{"subsnoti upload", "https://upload.yorkyao.xyz/api/temperary", "POST", 0, 0, "", true, now},
 	}
 
 	ticker := time.NewTicker(time.Second * 60)
