@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -47,12 +48,18 @@ func main() {
 				}
 				targets[i].Total++
 				targets[i].LastTime = time.Now()
-				if err == nil && resp.StatusCode < 500 {
-					targets[i].LastIsSuccess = true
-				} else {
+				if err != nil {
 					targets[i].Fail++
 					targets[i].LastError = err.Error()
 					targets[i].LastIsSuccess = false
+				} else if resp != nil && resp.StatusCode >= 500 {
+					targets[i].Fail++
+					targets[i].LastError = strconv.Itoa(resp.StatusCode)
+					targets[i].LastIsSuccess = false
+				} else {
+					targets[i].LastIsSuccess = true
+				}
+				if resp != nil {
 					defer resp.Body.Close()
 				}
 			}
