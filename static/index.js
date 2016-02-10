@@ -20,7 +20,7 @@ $.ajax({
     cache: false,
     success: function (data) {
         for (var i = 0; i < data.length; i++) {
-            var rate = data[i].total === 0 ? 1 : +((data[i].total - data[i].fail) / data[i].total).toFixed(4);
+            var rate = data[i].total === 0 ? 1 : (data[i].total - data[i].fail) / data[i].total;
             var first = Math.round(255 - rate * 255);
             var second = Math.round(rate * 255);
             var color = (first * 256 * 256 + second * 256).toString(16);
@@ -30,7 +30,7 @@ $.ajax({
                 color = "0" + color;
             }
             data[i].color = color;
-            data[i].rate = rate * 100 + "%";
+            data[i].rate = (rate * 100).toFixed(4) + "%";
         }
         vue.status = data;
     }
