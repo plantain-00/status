@@ -60,7 +60,7 @@ func main() {
 					targets[i].LastIsSuccess = true
 				}
 				if resp != nil {
-					defer resp.Body.Close()
+					resp.Body.Close()
 				}
 			}
 		}
