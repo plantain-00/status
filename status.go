@@ -24,6 +24,7 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	now := time.Now()
 	targets := []Target{
+        Target{"co markdown", "https://md.yorkyao.xyz/", "GET", 0, 0, "", true, now},
 		Target{"subsnoti backend", "https://yorkyao.xyz/api/version", "GET", 0, 0, "", true, now},
 		Target{"subsnoti frontend", "https://yorkyao.xyz/", "GET", 0, 0, "", true, now},
 		Target{"subsnoti doc", "https://doc.yorkyao.xyz/", "GET", 0, 0, "", true, now},
