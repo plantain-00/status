@@ -16,6 +16,26 @@ var vue = new Vue({
     }
 });
 
+function getDuration(minutes) {
+    var duration;
+    if (minutes % 60 !== 0) {
+        duration = minutes % 60 + " min";
+    } else {
+        duration = "";
+    }
+    var hours = Math.floor(minutes / 60);
+
+    if (hours % 24 !== 0) {
+        duration = hours % 24 + " h" + (duration ? " " + duration : duration);
+    }
+    var days = Math.floor(hours / 24);
+
+    if (days !== 0) {
+        duration = days + " d" + (duration ? " " + duration : duration);
+    }
+    return duration;
+}
+
 $.ajax({
     url: "/api/status",
     cache: false,
@@ -32,6 +52,8 @@ $.ajax({
             }
             data[i].color = color;
             data[i].rate = (rate * 100).toFixed(4) + "%";
+
+            data[i].duration = getDuration(data[i].total);
         }
         vue.status = data;
     }
