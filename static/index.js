@@ -10,7 +10,6 @@ var vue = new Vue({
             "SubsNoti-doc",
             "news-fetcher",
             "SubsNoti",
-            "SubsNoti-app",
             "co-md"
         ]
     }
